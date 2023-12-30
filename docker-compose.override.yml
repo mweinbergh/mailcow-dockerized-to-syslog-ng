@@ -1,0 +1,107 @@
+version: '2.1'
+services:
+
+  dovecot-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1514"
+        syslog-facility: "local3"
+
+  postfix-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1515"
+        syslog-facility: "local3"
+
+  rspamd-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1516"
+        syslog-facility: "local3"
+
+  clamd-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1517"
+        syslog-facility: "local3"
+
+  netfilter-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1518"
+        syslog-facility: "local3"
+
+  nginx-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1519"
+        syslog-facility: "local3"
+
+  sogo-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1520"
+        syslog-facility: "local3"
+
+  mysql-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1521"
+        syslog-facility: "local3"
+
+  php-fpm-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1522"
+        syslog-facility: "local3"
+
+  ofelia-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1523"
+        syslog-facility: "local3"
+
+  olefy-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1524"
+        syslog-facility: "local3"
+
+  dockerapi-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1525"
+        syslog-facility: "local3"
+
+  acme-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1526"
+        syslog-facility: "local3"
+
+  watchdog-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1527"
+        syslog-facility: "local3"
+
+  redis-mailcow:
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "udp://127.0.0.1:1528"
+        syslog-facility: "local3"

@@ -5,6 +5,8 @@ This is a guide on how to permanently store the logs of the individual Mailcow-d
 
 This How-To assumes that mailcow-dockerized is installed in the **/opt/** directory and that the syslog-ng configuration files are located in the **/etc/syslog-ng/conf.d/** directory. If you have installed them elsewhere, you must adjust the paths.
 
+Last tested with Mailcow Release 2024-08a
+
 ## Requirements
 
 Mandatory: The **syslog-ng** package must be installed and the service **syslog-ng.service** started and enabled.

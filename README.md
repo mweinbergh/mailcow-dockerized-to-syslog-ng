@@ -146,6 +146,8 @@ Comment out the `@include` lines of the logs you are not interested in.
 #### /etc/syslog-ng/conf.d/99-mailcow.conf
 
 ```bash
+@define MC_ADD_TS "no"
+
 # Mailcow Dovecot
 @define MC_PORT 1514
 @define MC_APP "dovecot"
@@ -267,11 +269,15 @@ log {
 
 ## Log Rotation
 
+This rotates the log files weekly into the directory archive. If the Postfix summarizer 'pflogsumm' is installed a report is written into /var/log/mailcow/pflogsumm/
+
 Change the parameters according to your needs
 
-#### /etc/logrotate.d/mailcow
-
+#### /etc/logrotate.d/mailcow-rotate
 ```bash
+# Postfix log entry summarizer installation:
+# Redhat: dnf install postfix-perl-scripts
+# Debian: sudo apt-get install pflogsumm
 /var/log/mailcow/*log {
     create 0600 root root
     weekly
@@ -280,6 +286,16 @@ Change the parameters according to your needs
     notifempty
     compress
     sharedscripts
+	olddir archive
+	createolddir 0700 root root
+	prerotate
+		PF=/usr/sbin/pflogsumm
+		if [ -f $PF ] ; then
+			DD="/var/log/mailcow/pflogsumm"
+			mkdir -p $DD
+			perl $PF --iso-date-time --problems-first --rej-add-from --smtpd-stats --verbose-msg-detail --zero-fill /var/log/mailcow/postfix.log > $DD/$(date "+%Y%m%d").txt
+		fi
+	endscript
     postrotate
        syslog-ng-ctl reload 
     endscript

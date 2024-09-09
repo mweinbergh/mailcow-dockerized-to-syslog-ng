@@ -1,0 +1,25 @@
+# Postfix log entry summarizer installation:
+# Redhat: dnf install postfix-perl-scripts
+# Debian: sudo apt-get install pflogsumm
+/var/log/mailcow/*log {
+    create 0600 root root
+    weekly
+    rotate 26
+    missingok
+    notifempty
+    compress
+    sharedscripts
+	olddir archive
+	createolddir 0700 root root
+	prerotate
+		PF=/usr/sbin/pflogsumm
+		if [ -f $PF ] ; then
+			DD="/var/log/mailcow/pflogsumm"
+			mkdir -p $DD
+			perl $PF --iso-date-time --problems-first --rej-add-from --smtpd-stats --verbose-msg-detail --zero-fill /var/log/mailcow/postfix.log > $DD/$(date "+%Y%m%d").txt
+		fi
+	endscript
+    postrotate
+       syslog-ng-ctl reload 
+    endscript
+}

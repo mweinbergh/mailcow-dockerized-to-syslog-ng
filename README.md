@@ -286,16 +286,16 @@ Change the parameters according to your needs
     notifempty
     compress
     sharedscripts
-	olddir archive
-	createolddir 0700 root root
-	prerotate
-		PF=/usr/sbin/pflogsumm
-		if [ -f $PF ] ; then
-			DD="/var/log/mailcow/pflogsumm"
-			mkdir -p $DD
-			perl $PF --iso-date-time --problems-first --rej-add-from --smtpd-stats --verbose-msg-detail --zero-fill /var/log/mailcow/postfix.log > $DD/$(date "+%Y%m%d").txt
-		fi
-	endscript
+    olddir archive
+    createolddir 0700 root root
+    prerotate
+        PF=/usr/sbin/pflogsumm
+        if [ -f $PF ] ; then
+            DD="/var/log/mailcow/pflogsumm"
+            mkdir -p $DD
+            perl $PF --iso-date-time --problems-first --rej-add-from --smtpd-stats --verbose-msg-detail --zero-fill /var/log/mailcow/postfix.log > $DD/$(date "+%Y%m%d").txt
+        fi
+    endscript
     postrotate
        syslog-ng-ctl reload 
     endscript
